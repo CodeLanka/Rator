@@ -7,6 +7,7 @@ class GitHubAdaptor(Adaptor):
         pass
 
     def rate(self, answer):
-        r = self.get('https://api.github.com/user/'+answer)
-        r.json()
-        return 100
+        r = self.get('https://api.github.com/users/'+answer)
+        j = r.json()
+        print(j)
+        return j['public_gists'] + j['public_repos']*2

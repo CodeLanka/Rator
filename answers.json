@@ -1,0 +1,76 @@
+[{ 
+  "user": {
+    "email" : "agentmilindu@gmail.com",
+    "score" :  355
+  },
+  "answers": [
+    {
+     "id": 1,
+     "question": "Your name",
+     "value": "Milindu Sanok Kuamarage",
+     "semantic" : "user.profile.name"
+    }, 
+    {
+      "id": 2,
+      "question": "Contact Number?",
+      "value": "+94112000000",
+      "semantic" : "user.profile.telephone"
+    },
+    {
+      "id": 3,
+      "question": "Organization / Institute Name?",
+      "value": "RSVP.lk",
+      "semantic" : "user.profile.organisation"
+    }, 
+    {
+     "id": 4,
+      "question": "GitHub Username?",
+      "value": "agentmilindu",
+      "semantic" : "user.github.username"
+    }, 
+    {
+      "id": 5,
+      "question": "StackOverflow Username?",
+      "value": "http://stackoverflow.com/users/1190184/milindu-sanoj-kumarage",
+      "semantic" : "user.stackoverflow.url"
+    }
+  ]
+},{ 
+  "user": {
+    "email" : "tdevinda@gmail.com",
+    "score" :  325
+  },
+  "answers": [
+    {
+     "id": 1,
+     "question": "Your name",
+     "value": "Tharaka Devinda",
+     "semantic" : "user.profile.name"
+    }, 
+    {
+      "id": 2,
+      "question": "Contact Number?",
+      "value": "+94112000001",
+      "semantic" : "user.profile.telephone"
+    },
+    {
+      "id": 3,
+      "question": "Organization / Institute Name?",
+      "value": "GDG Sri Lanka",
+      "semantic" : "user.profile.organisation"
+    }, 
+    {
+     "id": 4,
+      "question": "GitHub Username?",
+      "value": "http://github.com/tdevinda",
+      "semantic" : "user.github.url"
+    }, 
+    {
+      "id": 5,
+      "question": "StackOverflow Username?",
+      "value": "",
+      "semantic" : "user.stackoverflow.url"
+    }
+  ]
+}
+]

@@ -1,4 +1,4 @@
-from adaptors.user.github import GitHubAdaptor
+from adaptors.user.github import GithubAdaptor
 
-x = GitHubAdaptor()
+x = GithubAdaptor()
 print(x.rate('agentmilindu'))

@@ -1,5 +1,7 @@
+from __future__ import division
 import math
 from datetime import datetime
+
 
 from adaptors.Adaptor import Adaptor
 import re

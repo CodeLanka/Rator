@@ -10,7 +10,7 @@ class StackoverflowAdaptor(Adaptor):
         pass
 
     def rate(self, answer):
-        return self.username(self.url(answer))
+        return self.url(answer)
 
     def username(self, answer):
         r = self.get('https://api.stackexchange.com/2.2/users/'+str(answer)+'?order=desc&sort=reputation&site=stackoverflow')

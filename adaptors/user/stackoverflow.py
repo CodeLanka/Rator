@@ -1,4 +1,5 @@
 import math
+import json
 
 from adaptors.Adaptor import Adaptor
 import re
@@ -15,8 +16,6 @@ class StackoverflowAdaptor(Adaptor):
     def username(self, answer):
         r = self.get('https://api.stackexchange.com/2.2/users/'+str(answer)+'?order=desc&sort=reputation&site=stackoverflow')
         j = r.json()
-        # print(j['items'][0]['reputation'])
-        print(j['items'][0]['badge_counts'])
         badges = j['items'][0]['badge_counts']
         return self.get_score(j['items'][0]['reputation'], badges['bronze'], badges['silver'], badges['gold'])
 

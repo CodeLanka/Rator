@@ -22,5 +22,6 @@ with open('answers.json') as data_file:
 	    rates.append(rate)
 
 	print(', '.join(list(map(str,rates))), file=f)
+	f.flush()
 		
 

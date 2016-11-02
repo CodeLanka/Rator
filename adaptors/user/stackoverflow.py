@@ -11,25 +11,26 @@ class StackoverflowAdaptor(Adaptor):
         pass
 
     def rate(self, answer):
-        return self.url(answer)
+        userid = self.get_userid(answer)
+        return self.get_score(userid)
 
-    def username(self, answer):
-	if answer == "":
+    def get_score(self, answer):
+        if answer == "":
             return 0
         else:
             r = self.get('https://api.stackexchange.com/2.2/users/'+str(answer)+'?order=desc&sort=reputation&site=stackoverflow')
             j = r.json()
             badges = j['items'][0]['badge_counts']
-            return self.get_score(j['items'][0]['reputation'], badges['bronze'], badges['silver'], badges['gold'])
+            return self.do_score_calculation(j['items'][0]['reputation'], badges['bronze'], badges['silver'], badges['gold'])
 
-    def url(self, answer):
+    def get_userid(self, answer):
         if answer == "":
             return 0
         else:
             username = re.search(r"http[s]?://stackoverflow.com/users/([0-9]*)/[0-9a-zA-Z]*", answer).group(1)
-            return self.username(username)
+            return username
 
-    def get_score(self, reputation, bronze_badges, silver_badges, gold_badges):
+    def do_score_calculation(self, reputation, bronze_badges, silver_badges, gold_badges):
         multiplier = (gold_badges / 2) + (silver_badges / 3) + (bronze_badges / 5)
         score = math.ceil(reputation * (1 + multiplier))
         return score

@@ -13,28 +13,21 @@ class GithubAdaptor(Adaptor):
         pass
 
     def rate(self, answer):
-        return self.username(answer)
+        return self.get_score(answer)
 
-    def username(self, answer):
-	try:
-	   if answer == "":
-               return 0
-           else:
-               r = self.get('https://api.github.com/users/'+answer)
-               j = r.json()
-               return self.get_score(j['public_repos'], j['created_at'], j['updated_at'], j['followers'], j['following'])
-	except:
-	   return 0
-
-
-    def url(self, answer):
-        if answer == "":
+    def get_score(self, answer):
+        try:
+            if answer == "":
+                return 0
+            else:
+                r = self.get('https://api.github.com/users/'+answer)
+                j = r.json()
+                return self.do_score_calculation(j['public_repos'], j['created_at'], j['updated_at'], j['followers'], j['following'])
+        except:
             return 0
-        else:
-            username = re.search(r"http[s]?://github.com/([a-zA-Z0-9]*)", answer).group(1)
-            return self.username(username)
 
-    def get_score(self, repos, joined_date, updated_date, followers, following):
+
+    def do_score_calculation(self, repos, joined_date, updated_date, followers, following):
         repo_score = 50 * ( 1 - 1 / (repos + 1))
         date_diff = datetime.strptime(updated_date, "%Y-%m-%dT%H:%M:%SZ") - datetime.strptime(joined_date, "%Y-%m-%dT%H:%M:%SZ")
 

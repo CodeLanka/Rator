@@ -1,7 +1,7 @@
 from __future__ import division
 import math
 from datetime import datetime
-
+import re
 
 from adaptors.Adaptor import Adaptor
 import re
@@ -13,7 +13,9 @@ class GithubAdaptor(Adaptor):
         pass
 
     def rate(self, answer):
-        return self.get_score(answer)
+        userid = self.get_userid(answer)
+        print(userid)
+        return self.get_score(userid)
 
     def get_score(self, answer):
         try:
@@ -25,6 +27,14 @@ class GithubAdaptor(Adaptor):
                 return self.do_score_calculation(j['public_repos'], j['created_at'], j['updated_at'], j['followers'], j['following'])
         except:
             return 0
+
+
+    def get_userid(self, answer):
+        if re.match("^\w+$", answer):
+            return answer
+        elif re.match(r"https?://\w+\.com/(\w+)/?", answer):
+            return re.search(r"https?://\w+\.com/(\w+)", answer).group(1)
+
 
 
     def do_score_calculation(self, repos, joined_date, updated_date, followers, following):

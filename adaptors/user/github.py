@@ -16,9 +16,15 @@ class GithubAdaptor(Adaptor):
         return self.username(answer)
 
     def username(self, answer):
-        r = self.get('https://api.github.com/users/'+answer)
-        j = r.json()
-        return self.get_score(j['public_repos'], j['created_at'], j['updated_at'], j['followers'], j['following'])
+	try:
+	   if answer == "":
+               return 0
+           else:
+               r = self.get('https://api.github.com/users/'+answer)
+               j = r.json()
+               return self.get_score(j['public_repos'], j['created_at'], j['updated_at'], j['followers'], j['following'])
+	except:
+	   return 0
 
 
     def url(self, answer):

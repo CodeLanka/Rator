@@ -14,10 +14,13 @@ class StackoverflowAdaptor(Adaptor):
         return self.url(answer)
 
     def username(self, answer):
-        r = self.get('https://api.stackexchange.com/2.2/users/'+str(answer)+'?order=desc&sort=reputation&site=stackoverflow')
-        j = r.json()
-        badges = j['items'][0]['badge_counts']
-        return self.get_score(j['items'][0]['reputation'], badges['bronze'], badges['silver'], badges['gold'])
+	if answer == "":
+            return 0
+        else:
+            r = self.get('https://api.stackexchange.com/2.2/users/'+str(answer)+'?order=desc&sort=reputation&site=stackoverflow')
+            j = r.json()
+            badges = j['items'][0]['badge_counts']
+            return self.get_score(j['items'][0]['reputation'], badges['bronze'], badges['silver'], badges['gold'])
 
     def url(self, answer):
         if answer == "":

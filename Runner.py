@@ -11,17 +11,18 @@ def get_rate(semantic_string, answer):
     adaptor = getattr(package, semantic[1].capitalize()+"Adaptor")()
     return getattr(adaptor, semantic[2])(answer)
 
-f = open('rates','w')
-with open('answers.json') as data_file:
+f = open('rates_prod','w')
+with open('answers_prod.json') as data_file:
     items = json.load(data_file)
     for item in items:
-	rates = [item['user']['email'], item['user']['score']]
+        print(item['user']['email'])
+        rates = [item['user']['email'], item['user']['score']]
 
         for answer in item["answers"]:
             rate = get_rate(answer["semantic"], answer["value"])
-	    rates.append(rate)
+            rates.append(rate)
 
-	print(', '.join(list(map(str,rates))), file=f)
-	f.flush()
-		
+        print(', '.join(list(map(str,rates))), file=f)
+        f.flush()
+
 

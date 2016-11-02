@@ -12,9 +12,14 @@ class GithubAdaptor(Adaptor):
     def __init__(self):
         pass
 
+    def username(self, answer):
+        return self.rate(answer)
+
+    def url(self, answer):
+        return self.rate(answer)
+
     def rate(self, answer):
         userid = self.get_userid(answer)
-        print(userid)
         return self.get_score(userid)
 
     def get_score(self, answer):

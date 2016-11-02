@@ -13,5 +13,14 @@ class ProfileAdaptor(Adaptor):
     def telephone(self, answer):
         return 0
 
+    def nic(self, answer):
+        return 0
+
     def organisation(self, answer):
+        return 0
+	
+    def meal(self, answer):
+        return 0
+
+    def tshirt(self, answer):
         return 0

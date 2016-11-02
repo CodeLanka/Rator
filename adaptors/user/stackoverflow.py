@@ -18,9 +18,10 @@ class StackoverflowAdaptor(Adaptor):
 
     def rate(self, answer):
         if answer == "":
-            return 0;
-        userid = self.get_userid(answer)
-        return self.get_score(userid)
+            return 0
+        else:
+            userid = self.get_userid(answer)
+            return self.get_score(userid)
 
     def get_score(self, answer):
         if answer == None:

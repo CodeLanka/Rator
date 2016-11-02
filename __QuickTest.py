@@ -1,7 +1,7 @@
 from adaptors.user.github import GithubAdaptor
 from adaptors.user.stackoverflow import StackoverflowAdaptor
 x = GithubAdaptor()
-print(x.rate('ashanrupasinghe'))
+print(x.username('ashanrupasinghe'))
 # print(x.rate('tdevinda'))
 # print(x.rate('THarsh'))
 

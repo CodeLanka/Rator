@@ -20,7 +20,10 @@ class GithubAdaptor(Adaptor):
 
     def rate(self, answer):
         userid = self.get_userid(answer)
-        return self.get_score(userid)
+        if userid == "":
+            return 0
+        else:
+            return self.get_score(userid)
 
     def get_score(self, answer):
         print(answer, "git")
@@ -40,6 +43,8 @@ class GithubAdaptor(Adaptor):
             return answer
         elif re.match(r"https?://\w+\.com/(\w+)/?", answer):
             return re.search(r"https?://\w+\.com/(\w+)", answer).group(1)
+        else:
+            return ""
 
 
 

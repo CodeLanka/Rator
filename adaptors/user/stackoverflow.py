@@ -21,10 +21,13 @@ class StackoverflowAdaptor(Adaptor):
             return 0
         else:
             userid = self.get_userid(answer)
-            return self.get_score(userid)
+            if userid == "":
+                return 0
+            else:
+                return self.get_score(userid)
 
     def get_score(self, answer):
-        if answer == None:
+        if answer == "":
             return 0
         else:
             r = self.get('https://api.stackexchange.com/2.2/users/'+str(answer)+'?order=desc&sort=reputation&site=stackoverflow')
@@ -33,11 +36,11 @@ class StackoverflowAdaptor(Adaptor):
             return self.do_score_calculation(j['items'][0]['reputation'], badges['bronze'], badges['silver'], badges['gold'])
 
     def get_userid(self, answer):
-        if re.match("^\d+$", answer):
-            return answer
-        else:
+        if re.match("http[s]?://stackoverflow.com/users/([0-9]*)/[0-9a-zA-Z]*", answer):
             username = re.search(r"http[s]?://stackoverflow.com/users/([0-9]*)/[0-9a-zA-Z]*", answer).group(1)
             return username
+        else:
+            return ""
 
     def do_score_calculation(self, reputation, bronze_badges, silver_badges, gold_badges):
         multiplier = (gold_badges / 2) + (silver_badges / 3) + (bronze_badges / 5)

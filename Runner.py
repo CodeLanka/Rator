@@ -11,8 +11,8 @@ def get_rate(semantic_string, answer):
     adaptor = getattr(package, semantic[1].capitalize()+"Adaptor")()
     return getattr(adaptor, semantic[2])(answer)
 
-f = open('rates_prod','w')
-with open('answers_prod.json') as data_file:
+f = open('rates_1','w')
+with open('answers_1.json') as data_file:
     items = json.load(data_file)
     for item in items:
         print(item['user']['email'])

@@ -57,4 +57,8 @@ class GithubAdaptor(Adaptor):
         follower_score = 10 * (1 - (1 / (followers + 1)))
         following_score = 10 * (1 - (1 / (following + 1)))
         return repo_score + date_score + follower_score + following_score
+	
+    def get(self, url):
+        return requests.get(url, auth=('user', 'pass'))
+	
 

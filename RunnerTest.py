@@ -12,6 +12,7 @@ def get_rate(semantic_string, answer):
     return getattr(adaptor, semantic[2])(answer)
 
 with open('answers.json') as data_file:
+
     items = json.load(data_file)
     a = 0
     
@@ -21,12 +22,11 @@ with open('answers.json') as data_file:
 
         for answer in item["answers"]:
             if answer["semantic"] == "user.github.username" and answer["value"] != "":
-                 github += 1
+                github += 1
             elif answer["semantic"] == "user.stackoverflow.url" and answer["value"] != "":
-                 so += 1
+                so += 1
         if github == 1 and so == 1:
-		a += 1
-
+            a += 1
     print(a)
 
 

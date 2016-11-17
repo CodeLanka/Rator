@@ -35,7 +35,7 @@ def merge_user_rate(user_array, rate_array):
 
 def write_results(final_array):
     f = open('rates_123', 'w')
-    print(', '.join(list(map(str, final_array))), file=f)
+    print('\n'.join(list(map(lambda s: ", ".join(list(map(str, s))), final_array))), file=f)
     print('\n'.join(list(map(str, final_array))))
     f.flush()
 

@@ -1,10 +1,11 @@
 from __future__ import division
 import math
 from datetime import datetime
-import re
+
 
 from adaptors.Adaptor import Adaptor
 import re
+import requests
 
 
 class GithubAdaptor(Adaptor):
@@ -37,7 +38,6 @@ class GithubAdaptor(Adaptor):
         except:
             return 0
 
-
     def get_userid(self, answer):
         if re.match("^\w+$", answer):
             return answer
@@ -45,8 +45,6 @@ class GithubAdaptor(Adaptor):
             return re.search(r"https?://\w+\.com/(\w+)", answer).group(1)
         else:
             return ""
-
-
 
     def do_score_calculation(self, repos, joined_date, updated_date, followers, following):
         repo_score = 50 * ( 1 - 1 / (repos + 1))
@@ -57,8 +55,7 @@ class GithubAdaptor(Adaptor):
         follower_score = 10 * (1 - (1 / (followers + 1)))
         following_score = 10 * (1 - (1 / (following + 1)))
         return repo_score + date_score + follower_score + following_score
-	
+
     def get(self, url):
         return requests.get(url, auth=('user', 'pass'))
-	
 

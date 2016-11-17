@@ -24,7 +24,7 @@ def soft_max_2(x):
 
 def apply_soft_max(rate_list):
     for rateIndex in range(len(rate_list)):
-        rate_list[rateIndex] = list(soft_max(rate_list[rateIndex]))
+        rate_list[rateIndex] = list(soft_max_2(rate_list[rateIndex]))
 
 
 def merge_user_rate(user_array, rate_array):
@@ -36,7 +36,7 @@ def merge_user_rate(user_array, rate_array):
 def write_results(final_array):
     f = open('rates_123', 'w')
     print(', '.join(list(map(str, final_array))), file=f)
-    print(', '.join(list(map(str, final_array))))
+    print('\n'.join(list(map(str, final_array))))
     f.flush()
 
 
@@ -52,11 +52,11 @@ with open('answers.json') as data_file:
         print(item['user']['email'])
         user = [item['user']['email'], item['user']['score']]
         user_array.append(user)
-        for answer in item["answers"]:
+        for idx, answer in enumerate(item["answers"]):
             rate = get_rate(answer["semantic"], answer["value"])
-            print(answer["semantic"], rate)
+            print(" - ",answer["semantic"], ":", rate)
             # rates.append(rate)
-            rate_array[int(answer["id"])-1].append(rate)
+            rate_array[idx].append(rate)
 
     apply_soft_max(rate_array)
     merge_user_rate(user_array, rate_array)

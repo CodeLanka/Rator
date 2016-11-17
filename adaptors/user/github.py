@@ -27,7 +27,6 @@ class GithubAdaptor(Adaptor):
             return self.get_score(userid)
 
     def get_score(self, answer):
-        print(answer, "git")
         try:
             if answer == "":
                 return 0

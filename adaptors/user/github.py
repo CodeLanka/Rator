@@ -7,6 +7,8 @@ import os
 from adaptors.Adaptor import Adaptor
 import re
 import requests
+import time
+
 
 
 class GithubAdaptor(Adaptor):
@@ -35,7 +37,12 @@ class GithubAdaptor(Adaptor):
             else:
                 r = self.get('https://api.github.com/users/'+answer)
                 j = r.json()
+
+                limit_remaining = int(r.headers['X-RateLimit-Remaining'])
+                if limit_remaining < 2:
+                    self.sleep_till_reset(r.headers['X-RateLimit-Reset'])
                 print(j)
+
                 return self.do_score_calculation(j['public_repos'], j['created_at'], j['updated_at'], j['followers'], j['following'])
         except:
             return 0
@@ -60,4 +67,14 @@ class GithubAdaptor(Adaptor):
 
     def get(self, url):
         return requests.get(url, auth=(os.environ.get("GIT_USER"), os.environ.get("GIT_PASS")))
+
+    def sleep_till_reset(self, reset_timestamp):
+        sleep_duration = float(reset_timestamp) - time.time()
+        print("Program sleep till : ", time.ctime(int(reset_timestamp)))
+        time.sleep(sleep_duration)
+        print("Reset complete")
+
+
+
+
 

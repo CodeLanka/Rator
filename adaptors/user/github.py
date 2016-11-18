@@ -1,6 +1,7 @@
 from __future__ import division
 import math
 from datetime import datetime
+import os
 
 
 from adaptors.Adaptor import Adaptor
@@ -34,6 +35,7 @@ class GithubAdaptor(Adaptor):
             else:
                 r = self.get('https://api.github.com/users/'+answer)
                 j = r.json()
+                print(j)
                 return self.do_score_calculation(j['public_repos'], j['created_at'], j['updated_at'], j['followers'], j['following'])
         except:
             return 0
@@ -57,5 +59,5 @@ class GithubAdaptor(Adaptor):
         return repo_score + date_score + follower_score + following_score
 
     def get(self, url):
-        return requests.get(url, auth=('user', 'pass'))
+        return requests.get(url, auth=(os.environ.get("GIT_USER"), os.environ.get("GIT_PASS")))
 

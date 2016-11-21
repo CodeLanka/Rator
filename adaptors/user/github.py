@@ -66,7 +66,7 @@ class GithubAdaptor(Adaptor):
         return repo_score + date_score + follower_score + following_score
 
     def get(self, url):
-        return requests.get(url, auth=(os.environ.get("GIT_USER"), os.environ.get("GIT_PASS")))
+        return requests.get(url, auth=(os.environ.get("GITHUB_USERNAME"), os.environ.get("GITHUB_PASSWORD")))
 
     def sleep_till_reset(self, reset_timestamp):
         sleep_duration = float(reset_timestamp) - time.time()

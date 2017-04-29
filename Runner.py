@@ -40,17 +40,17 @@ def write_results(final_array):
     f.flush()
 
 
-with open('answers.json') as data_file:
+with open('data/responses.json') as data_file:
     items = json.load(data_file)
     rate_array = []
     user_array = []
 
-    for answer in items[0]["answers"]:
+    for answer in items:
         rate_array.append([])
 
     for item in items:
-        print(item['user']['email'])
-        user = [item['user']['email'], item['user']['score']]
+        print(item['email'])
+        user = [item['email'], item['score']]
         user_array.append(user)
         for idx, answer in enumerate(item["answers"]):
             rate = get_rate(answer["semantic"], answer["value"])

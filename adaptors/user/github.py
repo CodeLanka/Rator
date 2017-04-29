@@ -3,13 +3,10 @@ import math
 from datetime import datetime
 import os
 
-
 from adaptors.Adaptor import Adaptor
 import re
 import requests
 import time
-
-
 
 class GithubAdaptor(Adaptor):
 

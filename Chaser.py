@@ -18,6 +18,7 @@ with open('data/responses.json') as data_file:
         record['user'] = {}
         record['answers'] = []
         record['user']['email'] = entry['email']
+        record['user']['score'] = 0
         response = json.loads(entry['response'])
         for qna in response:
             if semantic_mappings[int(qna['name'])] != '':

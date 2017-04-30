@@ -16,11 +16,14 @@ class ProfileAdaptor(Adaptor):
     def nic(self, answer):
         return 0
 
-    def organisation(self, answer):
+    def organization(self, answer):
         return 0
 	
     def meal(self, answer):
         return 0
 
     def tshirt(self, answer):
+        return 0
+
+    def role(self, answer):
         return 0

@@ -10,8 +10,5 @@ class TwitterAdaptor(Adaptor):
     def url(self, answer):
         return 0
 
-    def username(self, answer):
-        return 0
-
     def handle(self, answer):
         return 0

@@ -7,7 +7,7 @@ class IdeamartAdaptor(Adaptor):
     def __init__(self):
         pass
 
-    def url(self, answer):
+    def id(self, answer):
         return 0
 
     def username(self, answer):

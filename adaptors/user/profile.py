@@ -18,7 +18,7 @@ class ProfileAdaptor(Adaptor):
 
     def organization(self, answer):
         return 0
-	
+
     def meal(self, answer):
         return 0
 

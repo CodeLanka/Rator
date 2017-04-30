@@ -5,11 +5,14 @@ import numpy as np
 
 def get_rate(semantic_string, answer):
     semantic = semantic_string.split(".")
-    module = __import__('adaptors.'+".".join([semantic[0], semantic[1]]))
-    submodule = getattr(module, semantic[0])
-    package = getattr(submodule, semantic[1])
-    adaptor = getattr(package, semantic[1].capitalize()+"Adaptor")()
-    return getattr(adaptor, semantic[2])(answer)
+    if len(semantic) > 1:
+        module = __import__('adaptors.'+".".join([semantic[0], semantic[1]]))
+        submodule = getattr(module, semantic[0])
+        package = getattr(submodule, semantic[1])
+        adaptor = getattr(package, semantic[1].capitalize()+"Adaptor")()
+        return getattr(adaptor, semantic[2])(answer)
+    else:
+        return None
     
 
 def soft_max(x):
@@ -40,23 +43,25 @@ def write_results(final_array):
     f.flush()
 
 
-with open('data/responses.json') as data_file:
+with open('data/answers_prod.json') as data_file:
     items = json.load(data_file)
     rate_array = []
     user_array = []
 
-    for answer in items:
+    for answer in items[0]['answers']:
         rate_array.append([])
 
     for item in items:
-        print(item['email'])
-        user = [item['email'], item['score']]
+        user = [item['user']['email'], item['user']['score']]
         user_array.append(user)
         for idx, answer in enumerate(item["answers"]):
-            rate = get_rate(answer["semantic"], answer["value"])
-            print(" - ",answer["semantic"], ":", rate)
-            # rates.append(rate)
-            rate_array[idx].append(rate)
+            rate = get_rate(answer["semantic"], answer["answer"])
+            if rate is not None:
+                print(" - ",answer["semantic"], ":", rate)
+                # rates.append(rate)
+                rate_array[idx].append(rate)
+            else:
+                print("non-sem")
 
     apply_soft_max(rate_array)
     merge_user_rate(user_array, rate_array)

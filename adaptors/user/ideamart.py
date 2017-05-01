@@ -12,3 +12,6 @@ class IdeamartAdaptor(Adaptor):
 
     def username(self, answer):
         return 0
+
+    def id(self, answer):
+        return 0
